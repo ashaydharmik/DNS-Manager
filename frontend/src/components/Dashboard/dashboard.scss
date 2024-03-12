@@ -1,0 +1,54 @@
+
+.dashboard-container{
+    width: 100%;
+    height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+    .left-box{
+        width: 10%;
+        height: 100vh;
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        padding: 2rem 0;
+        
+            p:last-child{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                font-size: 1rem;
+                color: #cf3636;
+                font-weight: 500;
+                margin-bottom: 1rem;
+                cursor: pointer;
+                svg {
+                  width: 25px;
+                  height: 30px;
+                }
+              }
+        
+    }
+    .right-box{
+        width: 90%;
+        height: 100vh;
+        background-color: antiquewhite;
+        .heading{
+            width: 100%;
+            height: 5vh;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .dns-table{
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+    }
+}

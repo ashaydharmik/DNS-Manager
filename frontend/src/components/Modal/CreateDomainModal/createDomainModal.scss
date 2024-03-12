@@ -1,0 +1,99 @@
+.modal-container {
+  .heading {
+    text-align: center;
+    font-weight: bold;
+  }
+  .form-container {
+    form {
+      .domain-name {
+        width: 100%;
+        height: 5vh;
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: aqua;
+        input {
+          width: 70%;
+          height: 30px;
+        }
+        span{
+          color: red;
+        }
+      }
+      .dns-records {
+        width: 100%;
+        height: 40vh;
+        margin-top: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        background: aqua;
+        overflow-y: auto;
+        span{
+          color: red;
+        }
+        .records {
+          margin-top: 10px;
+          width: 100%;
+          display: flex;
+          position: relative;
+          gap: 5px;
+          input {
+            width: 100%;
+            height: 30px;
+            padding-left: 2px;
+          }
+          svg {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            /* width: 4%; */
+            color: red;
+          }
+        }
+        #addRecord{
+          margin-top: 1rem;
+          width: 30%;
+          font-size: 12px;
+          padding: 2px 0px;
+          border: 1px solid grey;
+          border-radius: 5px;
+          /* font-weight: 600; */
+          height: 26px;
+          cursor: pointer;
+        }
+      }
+      .submit-button{
+        width: 100%;
+    height: 5vh;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* flex-direction: column; */
+    background: aqua;
+    button {
+        width: 38%;
+        font-size: 14px;
+        padding: 5px 10px;
+        border: 1px solid grey;
+        border-radius: 10px;
+        font-weight: 600;
+        height: 2.3rem;
+        cursor: pointer;
+        &:nth-child(1) {
+          border: 1.5px solid #cf3636;
+          color: #cf3636;
+          background-color: white;
+        }
+        &:nth-child(2) {
+          background: #17a2b8;
+          color: white;
+        }
+      }
+      }
+    }
+  }
+}
