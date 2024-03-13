@@ -3,12 +3,11 @@
     height: 95%;
     background-color: white;
     padding: 0 1rem;
+    overflow-y: auto;
 .heading{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.cards-container{
 
-}
 }

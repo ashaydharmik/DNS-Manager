@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ImBin2 } from "react-icons/im";
 import "./createDomainModal.scss";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useGlobal } from "../../Context/Context";
 
-const CreateDomainModal = ({ closeModal }) => {
+const CreateDomainModal = ({ closeModal, initialValues }) => {
+  const { fetchDomains } = useGlobal();
+
+  useEffect(() => {
+    if (initialValues) {
+      setFormData({
+        domainName: initialValues.domainName,
+        dnsRecords: initialValues.dnsRecords || [initialRecordValue],
+      });
+    }
+  }, [initialValues]);
+  // console.log(editCardData)
   const initialRecordValue = {
     name: "",
     type: "",
@@ -27,7 +39,6 @@ const CreateDomainModal = ({ closeModal }) => {
           ),
     }));
   };
-  
 
   const addRecord = () => {
     setFormData((prevData) => ({
@@ -48,7 +59,6 @@ const CreateDomainModal = ({ closeModal }) => {
     });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
@@ -61,27 +71,54 @@ const CreateDomainModal = ({ closeModal }) => {
         Authorization: `Bearer ${userToken}`,
       };
   
-      const response = await axios.post("http://localhost:4000/addDomain", formData, { headers });
+      if (initialValues) {
+        // Edit mode - make a PUT request
+        const response = await axios.put(
+          `http://localhost:4000/updateDomain/${initialValues._id}`,
+          formData,
+          { headers }
+        );
   
-      // Handle the response based on your backend behavior
-      if (response.status === 200) {
-        console.log("Domain added successfully:", response.data);
-  setFormData(response.data)
-  closeModal();
-  setTimeout(() => {
-    toast.success("Domains added successfully");
-  }, 1000);
+        // Handle the response based on your backend behavior
+        if (response.status === 200) {
+          console.log("Domain updated successfully:", response.data);
+          closeModal();
+          fetchDomains();
+          setTimeout(() => {
+            toast.success("Domain updated successfully");
+          }, 1000);
+        } else {
+          console.error("Error updating domain:", response.data);
+          toast.error("Error updating domain");
+        }
       } else {
-        console.error("Error adding domain:", response.data);
-        toast.error("Error adding domain:");
+        // Create mode - make a POST request
+        const response = await axios.post(
+          "http://localhost:4000/addDomain",
+          formData,
+          { headers }
+        );
+  
+        // Handle the response based on your backend behavior
+        if (response.status === 200) {
+          console.log("Domain added successfully:", response.data);
+          setFormData(response.data);
+          closeModal();
+          fetchDomains();
+          setTimeout(() => {
+            toast.success("Domain added successfully");
+          }, 1000);
+        } else {
+          console.error("Error adding domain:", response.data);
+          toast.error("Error adding domain");
+        }
       }
     } catch (error) {
-      console.error("API call failed:", error);
-      toast.error("API call failed:");
+      console.error("Error:", error);
+      toast.error("An error occurred");
     }
   };
   
-
 
   return (
     <>
@@ -160,7 +197,6 @@ const CreateDomainModal = ({ closeModal }) => {
           },
         }}
       />
-
     </>
   );
 };
