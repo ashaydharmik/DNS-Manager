@@ -5,7 +5,7 @@ const {
   loginUser
 } = require("../Controller/userController");
 
-const {addDomain, getAllDomains, updateDomain, fetchSingleDomain, deleteDomain} = require("../Controller/domainController")
+const {addDomain, getAllDomains, updateDomain, fetchSingleDomain, deleteDomain, uploadDomains} = require("../Controller/domainController")
 
 const errorHandler = require("../Middleware/errorHandler");
 const token = require("../Middleware/validateToken");
@@ -28,6 +28,8 @@ router.put('/updateDomain/:_id',token, updateDomain);
 router.get('/fetchSingleDomain/:_id',token, fetchSingleDomain);
 
 router.delete('/deleteDomain/:_id',token, deleteDomain);
+
+router.post('/upload',token, uploadDomains);
 
 router.use(errorHandler);
 

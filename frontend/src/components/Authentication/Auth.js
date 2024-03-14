@@ -17,10 +17,7 @@ const Auth = () => {
               {/* <img src={circle} className="circle" alt="" /> */}
               {/* <img src={image} className="avatar" alt="" /> */}
             </div>
-            <div className="content">
-              <p>Welcome aboard my friend</p>
-              <p>just a couple of clicks and we start</p>
-            </div>
+           
           </div>
         </div>
         <div className="right-container">

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const AppContext = React.createContext();
@@ -10,10 +10,17 @@ const AppProvider = ({ children }) => {
   const [fetchData, setFetchData] = useState([ ])
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editCardData, setEditCardData] = useState(null);
-  
+  const [selectedDomain, setSelectedDomain] = useState(null);
+  const [showAnalytics, setShowAnalytics]= useState(false)
+  const [showDashboard, setShowDashboard]= useState(false)
+const navigate = useNavigate()
+  const handleAnalyticsClick = () => {
+    setShowAnalytics(true); // Set showAnalytics to true when clicking on analytics
+    setShowDashboard(false); // Ensure dashboard is set to false when navigating to analytics
+    console.log("analytics");
+  };
+ 
 
-
-  const navigate = useNavigate();
   const auth = JSON.parse(localStorage.getItem("user")) || { token: null };
   const userToken = auth.token;
   const headers = {
@@ -45,11 +52,11 @@ const handleEdit = async(id) => {
       setEditCardData(singleDomainData);
       setEditModalVisible(true);
     } else {
-      console.error("Error fetching single domain data");
+      toast.error("Error fetching single domain data");
       // Handle error, e.g., show an error message
     }
   } catch (error) {
-    console.error("API call failed:", error);
+    toast.error("API call failed:", error);
     // Handle error, e.g., show an error message
   }
 };
@@ -92,7 +99,11 @@ const handleDelete = async (id) => {
         setEditModalVisible,
         editCardData,
         handleEdit,
-        handleDelete
+        handleDelete,
+        handleAnalyticsClick,
+        setShowAnalytics,
+        showAnalytics,
+        handleAnalyticsClick,showDashboard, setShowDashboard
       }}
     >
       {children}

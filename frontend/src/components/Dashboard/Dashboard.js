@@ -3,8 +3,13 @@ import "./dashboard.scss";
 import { IoLogOutOutline } from "react-icons/io5";
 import LogoutModal from "../Modal/LogoutModal/LogoutModal";
 import DomainTable from "./Table/DomainTable";
+import { useGlobal } from "../Context/Context";
+import DomainChart from "./Chart/DomainChart";
 const Dashboard = () => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+const {setShowAnalytics,showAnalytics,showDashboard, setShowDashboard} = useGlobal()
+
+
 
   const handleLogoutClick = () => {
     setIsLogoutModalOpen(true);
@@ -13,11 +18,30 @@ const Dashboard = () => {
     setIsLogoutModalOpen(false);
   };
 
+ 
+  const handleDashboard = () => {
+    setShowDashboard(true);
+    setShowAnalytics(false); // Ensure analytics is set to false when navigating to the dashboard
+    console.log("open");
+  };
+
+  
+
+  let dashboardContent;
+  if (showDashboard) {
+    dashboardContent = <DomainTable />;
+  } else if (showAnalytics) {
+    dashboardContent = <DomainChart />;
+  } else {
+    dashboardContent = <DomainTable />;
+  }
+
+
   return (
     <>
       <section className="dashboard-container">
         <div className="left-box">
-          <p>Dashboard</p>
+          <p onClick={handleDashboard}>Dashboard</p>
         
         <p onClick={handleLogoutClick}>
           <IoLogOutOutline />
@@ -31,7 +55,7 @@ const Dashboard = () => {
         <h1>DNS MANAGER</h1>
         </div>
         <div className="dns-table">
-          <DomainTable/>
+      {dashboardContent}
         </div>
 
         </div>

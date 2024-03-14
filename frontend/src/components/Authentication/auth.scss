@@ -7,7 +7,7 @@
   height: 100vh;
   width: 100%;
   .left-container {
-    width: 60%;
+    width: 50%;
     background-image: url("../../assets/img1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -58,7 +58,7 @@
     }
   }
   .right-container {
-    width: 40%;
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;

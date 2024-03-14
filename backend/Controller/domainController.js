@@ -1,8 +1,8 @@
 const asyncHandler = require("../Middleware/asyncHandler");
 const Domain = require("../Models/DomainModel");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const User = require("../Models/userModel")
+const multer = require('multer');
+const csvParser = require('csv-parser');
 
 //create a domain card record
 const addDomain = asyncHandler(async (req, res) => {
@@ -117,4 +117,33 @@ const addDomain = asyncHandler(async (req, res) => {
     }
   });
 
-  module.exports = {addDomain, getAllDomains, updateDomain, fetchSingleDomain, deleteDomain}
+
+  //upload
+  const uploadDomains = asyncHandler(async (req, res) => {
+
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+  
+    const csvData = req.file.buffer.toString();
+    const parsedData = parseCSV(csvData); 
+  
+    try {
+      for (const row of parsedData) {
+        const { domainName, dnsRecords } = row;
+
+        await Domain.create({ domainName, dnsRecords });
+      }
+  
+      res.status(200).json({ message: "Domains successfully uploaded" });
+    } catch (error) {
+      console.error("Error uploading domains:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+  
+  module.exports = { uploadDomains };
+  
+
+
+  module.exports = {addDomain, getAllDomains, updateDomain, fetchSingleDomain, deleteDomain, uploadDomains}

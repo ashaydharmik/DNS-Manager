@@ -4,10 +4,37 @@
     background-color: white;
     padding: 0 1rem;
     overflow-y: auto;
+    border-radius: 5px;
+    filter: drop-shadow(-1px 1px 4px rgb(154, 154, 154));
 .heading{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight: bold;
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #eeecec;
+        color: #767575;
+        font-weight: 500;
+        padding: 0.4rem 0.5rem;
+        border-radius: 7px;
+        border: none;
+        width: fit-content;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        svg{
+            font-size: 15px;
+        }
+      }
+}
 }
 
 }

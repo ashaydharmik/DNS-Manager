@@ -7,11 +7,15 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import CreateDomainModal from "../../Modal/CreateDomainModal/CreateDomainModal";
 import Modal from "react-modal";
 import { useParams } from "react-router-dom";
+import DomainChart from "../Chart/DomainChart";
+
 const Cards = () => {
   const { fetchData, fetchDomains,editModalVisible, setEditModalVisible,
     editCardData,
-    handleEdit, handleDelete } = useGlobal();
+    handleEdit, handleDelete,handleAnalyticsClick } = useGlobal();
   const [showDropdown, setShowDropdown] = useState(false);
+  
+
 
   const params = useParams();
   useEffect(() => {
@@ -61,6 +65,7 @@ const Cards = () => {
               {showDropdown[index] && (
                 <div className="dropdown-content">
                <p onClick={() => handleEdit(domain._id)}>Edit</p>
+               <p onClick={() => handleAnalyticsClick(domain)}>Analytics</p>
                   <p onClick={() => handleDelete(domain._id)}>Delete</p>
                 </div>
               )}
@@ -103,7 +108,7 @@ const Cards = () => {
           />
         </Modal>
       )}
-  
+      
     </>
   );
 };

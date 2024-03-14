@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Auth from "./components/Authentication/Auth";
 import Dashboard from "./components/Dashboard/Dashboard";
 import PrivateComponent from "./components/PrivateComponent/PrivateComponent";
+import DomainChart from './components/Dashboard/Chart/DomainChart';
 
 function App() {
   return (
