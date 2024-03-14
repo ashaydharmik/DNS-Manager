@@ -45,7 +45,7 @@ const DomainTable = () => {
 
         try {
             setUploading(true);
-            const response = await axios.post('http://localhost:4000/upload', formData,{headers})
+            const response = await axios.post('https://e-dashboard-wfgu.onrender.com/upload', formData,{headers})
             console.log(response.data);
             toast.success('File uploaded successfully!');
         } catch (error) {

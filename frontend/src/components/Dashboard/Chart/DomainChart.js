@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
 const DomainChart = ({ data }) => {
-  // State to hold chart data
+
   const [chartData, setChartData] = useState({});
 
-  // Format data for chart
- // Format data for chart
+ 
  useEffect(() => {
-    if (data && Array.isArray(data.dnsRecords)) { // Check if data exists and dnsRecords is an array
+    if (data && Array.isArray(data.dnsRecords)) {
       const dnsRecordsDataArray = data.dnsRecords.map(record => ({
         label: record.name,
-        value: 1, // Assuming each record contributes a count of 1
+        value: 1, 
       }));
   
       setChartData({

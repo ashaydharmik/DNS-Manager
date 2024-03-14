@@ -21,7 +21,7 @@ const {setShowAnalytics,showAnalytics,showDashboard, setShowDashboard} = useGlob
  
   const handleDashboard = () => {
     setShowDashboard(true);
-    setShowAnalytics(false); // Ensure analytics is set to false when navigating to the dashboard
+    setShowAnalytics(false); 
     console.log("open");
   };
 

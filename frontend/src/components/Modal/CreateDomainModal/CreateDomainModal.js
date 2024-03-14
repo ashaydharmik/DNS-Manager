@@ -72,14 +72,13 @@ const CreateDomainModal = ({ closeModal, initialValues }) => {
       };
   
       if (initialValues) {
-        // Edit mode - make a PUT request
         const response = await axios.put(
-          `http://localhost:4000/updateDomain/${initialValues._id}`,
+          `https://e-dashboard-wfgu.onrender.com/updateDomain/${initialValues._id}`,
           formData,
           { headers }
         );
   
-        // Handle the response based on your backend behavior
+ 
         if (response.status === 200) {
           console.log("Domain updated successfully:", response.data);
           closeModal();
@@ -92,14 +91,14 @@ const CreateDomainModal = ({ closeModal, initialValues }) => {
           toast.error("Error updating domain");
         }
       } else {
-        // Create mode - make a POST request
+       
         const response = await axios.post(
-          "http://localhost:4000/addDomain",
+          "https://e-dashboard-wfgu.onrender.com/addDomain",
           formData,
           { headers }
         );
   
-        // Handle the response based on your backend behavior
+        
         if (response.status === 200) {
           console.log("Domain added successfully:", response.data);
           setFormData(response.data);

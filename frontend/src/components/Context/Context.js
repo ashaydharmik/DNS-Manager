@@ -15,8 +15,8 @@ const AppProvider = ({ children }) => {
   const [showDashboard, setShowDashboard]= useState(false)
 const navigate = useNavigate()
   const handleAnalyticsClick = () => {
-    setShowAnalytics(true); // Set showAnalytics to true when clicking on analytics
-    setShowDashboard(false); // Ensure dashboard is set to false when navigating to analytics
+    setShowAnalytics(true); 
+    setShowDashboard(false); 
     console.log("analytics");
   };
  
@@ -30,7 +30,7 @@ const navigate = useNavigate()
 
   const fetchDomains = ()=>{
 
-    axios.get("http://localhost:4000/allDomain",{headers})
+    axios.get("https://e-dashboard-wfgu.onrender.com/allDomain",{headers})
     .then((res)=>{
        console.log(res.data)
             setFetchData(res.data.domains);
@@ -43,29 +43,29 @@ const navigate = useNavigate()
 
 const handleEdit = async(id) => {
   try {
-    const response = await axios.get(`http://localhost:4000/fetchSingleDomain/${id}`,{headers});
+    const response = await axios.get(`https://e-dashboard-wfgu.onrender.com/fetchSingleDomain/${id}`,{headers});
     
     if (response.status === 200) {
-      const singleDomainData = response.data.availableDomain; // Assuming the API response structure
+      const singleDomainData = response.data.availableDomain; 
       console.log(singleDomainData)
-      // Open the modal and pass the prefilled data
+    
       setEditCardData(singleDomainData);
       setEditModalVisible(true);
     } else {
       toast.error("Error fetching single domain data");
-      // Handle error, e.g., show an error message
+     
     }
   } catch (error) {
     toast.error("API call failed:", error);
-    // Handle error, e.g., show an error message
+
   }
 };
 
 const handleDelete = async (id) => {
   try {
-    const response = await axios.delete(`http://localhost:4000/deleteDomain/${id}`, { headers });
+    const response = await axios.delete(`https://e-dashboard-wfgu.onrender.com/deleteDomain/${id}`, { headers });
 
-    // Handle the response based on your backend behavior
+
     if (response.status === 200) {
       console.log("Domain deleted successfully");
       fetchDomains(); 
